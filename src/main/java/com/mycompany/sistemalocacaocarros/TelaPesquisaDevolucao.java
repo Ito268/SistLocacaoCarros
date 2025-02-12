@@ -9,18 +9,17 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelaPesquisaCarro extends JFrame {
+public class TelaPesquisaDevolucao extends JFrame {
 
     private JTextField txtModelo;
     private JComboBox<String> cbMarca, cbCor;
-    private JCheckBox chkDisponivel;
     private JButton btnPesquisar;
     private JTable tabela;
     private DefaultTableModel modeloTabela;
     private List<Carro> listaCarros;
 
-    public TelaPesquisaCarro() {
-        setTitle("Pesquisar Veículo");
+    public TelaPesquisaDevolucao() {
+        setTitle("Pesquisa de Carros Indisponíveis");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -34,7 +33,6 @@ public class TelaPesquisaCarro extends JFrame {
         JLabel lblModelo = new JLabel("Modelo:");
         JLabel lblMarca = new JLabel("Marca:");
         JLabel lblCor = new JLabel("Cor:");
-        JLabel lblDisponivel = new JLabel("Apenas disponíveis:");
 
         txtModelo = new JTextField(15);
 
@@ -43,8 +41,6 @@ public class TelaPesquisaCarro extends JFrame {
 
         String[] cores = {"Todas", "Preto", "Branco", "Prata", "Vermelho", "Azul", "Cinza", "Verde"};
         cbCor = new JComboBox<>(cores);
-
-        chkDisponivel = new JCheckBox();
 
         btnPesquisar = new JButton("Pesquisar");
 
@@ -78,17 +74,11 @@ public class TelaPesquisaCarro extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 3;
-        add(lblDisponivel, gbc);
-        gbc.gridx = 1;
-        add(chkDisponivel, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 4;
         gbc.gridwidth = 2;
         add(btnPesquisar, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
         add(scrollPane, gbc);
 
@@ -98,7 +88,7 @@ public class TelaPesquisaCarro extends JFrame {
         // Evento do botão de pesquisa
         btnPesquisar.addActionListener(this::filtrarCarros);
 
-        // Configurar a tabela para suportar o botão de locação
+        // Configurar a tabela para suportar o botão de devolução
         tabela.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
         tabela.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new JCheckBox()));
 
@@ -106,34 +96,26 @@ public class TelaPesquisaCarro extends JFrame {
     }
 
     private void inicializarCarros() {
-        listaCarros = new ArrayList<>();
+    listaCarros = new ArrayList<>();
 
-        listaCarros.add(new Carro(0, "Corolla", "Toyota", "ABC-1234", "Prata", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Civic", "Honda", "DEF-5678", "Preto", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Fusion", "Ford", "GHI-9012", "Azul", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Cruze", "Chevrolet", "JKL-3456", "Branco", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Golf", "Volkswagen", "MNO-7890", "Vermelho", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Fiesta", "Ford", "PQR-2345", "Cinza", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Tucson", "Hyundai", "STU-6789", "Verde", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Sentra", "Nissan", "VWX-1234", "Amarelo", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Yaris", "Toyota", "XYZ-1111", "Azul Claro", true, null, "", ""));
-        listaCarros.add(new Carro(0, "HR-V", "Honda", "XYZ-2222", "Cinza Escuro", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Ka", "Ford", "XYZ-3333", "Branco", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Onix", "Chevrolet", "XYZ-4444", "Preto", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Passat", "Volkswagen", "XYZ-5555", "Prata", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Argo", "Fiat", "XYZ-6666", "Verde", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Creta", "Hyundai", "XYZ-7777", "Preto", true, null, "", ""));
-        listaCarros.add(new Carro(0, "Kicks", "Nissan", "XYZ-8888", "Vermelho", true, null, "", ""));
+    listaCarros.add(new Carro(1, "Corolla", "Toyota", "ABC-1234", "Prata", false, 123, "10/02/2025", "12/02/2025"));
+    listaCarros.add(new Carro(2, "Civic", "Honda", "DEF-5678", "Preto", false, 456, "11/02/2025", "13/02/2025"));
+    listaCarros.add(new Carro(3, "Fusion", "Ford", "GHI-9012", "Azul", false, 789, "12/02/2025", "14/02/2025"));
+    listaCarros.add(new Carro(4, "Cruze", "Chevrolet", "JKL-3456", "Branco", false, 101, "13/02/2025", "15/02/2025"));
+    listaCarros.add(new Carro(5, "Golf", "Volkswagen", "MNO-7890", "Vermelho", false, 112, "14/02/2025", "16/02/2025"));
+    listaCarros.add(new Carro(6, "Fiesta", "Ford", "PQR-2345", "Cinza", false, 113, "15/02/2025", "17/02/2025"));
+    listaCarros.add(new Carro(7, "Tucson", "Hyundai", "STU-6789", "Verde", false, 114, "16/02/2025", "18/02/2025"));
+    listaCarros.add(new Carro(8, "Sentra", "Nissan", "VWX-1234", "Amarelo", false, 115, "17/02/2025", "19/02/2025"));
+
+    atualizarTabela(listaCarros);
+}
 
 
-        atualizarTabela(listaCarros);
-    }
 
     private void filtrarCarros(ActionEvent e) {
         String modeloPesquisa = txtModelo.getText().toLowerCase();
         String marcaPesquisa = (String) cbMarca.getSelectedItem();
         String corPesquisa = (String) cbCor.getSelectedItem();
-        boolean apenasDisponiveis = chkDisponivel.isSelected();
 
         List<Carro> resultados = new ArrayList<>();
 
@@ -141,7 +123,7 @@ public class TelaPesquisaCarro extends JFrame {
             boolean modeloOk = modeloPesquisa.isEmpty() || carro.getModelo().toLowerCase().contains(modeloPesquisa);
             boolean marcaOk = marcaPesquisa.equals("Todas") || carro.getMarca().equals(marcaPesquisa);
             boolean corOk = corPesquisa.equals("Todas") || carro.getCor().equals(corPesquisa);
-            boolean disponibilidadeOk = !apenasDisponiveis || carro.isDisponivel();
+            boolean disponibilidadeOk = !carro.isDisponivel();  // Só carros indisponíveis
 
             if (modeloOk && marcaOk && corOk && disponibilidadeOk) {
                 resultados.add(carro);
@@ -164,19 +146,19 @@ public class TelaPesquisaCarro extends JFrame {
                     carro.getPlaca(),
                     carro.getCor(),
                     carro.isDisponivel() ? "Sim" : "Não",
-                    "Locar" // Texto do botão na célula
+                    "Devolver" // Texto para o botão na célula
             });
         }
     }
 
     public static void main(String[] args) {
-        new TelaPesquisaCarro();
+        new TelaPesquisaDevolucao();
     }
 
     // Renderiza o botão na célula da tabela
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
-            setText("Locar");
+            setText("Devolver");
             setHorizontalAlignment(SwingConstants.CENTER);
         }
 
@@ -198,17 +180,14 @@ public class TelaPesquisaCarro extends JFrame {
                 int row = tabela.getSelectedRow();
                 Carro carro = listaCarros.get(row);
 
-                if (carro.isDisponivel()) {
-                    new TelaLocacao(carro);
-                } else {
-                    JOptionPane.showMessageDialog(TelaPesquisaCarro.this, "Este carro não está disponível para locação.", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
+                // Ao clicar no botão, redireciona para a TelaDevolucao
+                new TelaDevolucao(carro);
             });
         }
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            button.setText((value == null) ? "Locar" : value.toString());
+            button.setText((value == null) ? "Devolver" : value.toString());
             return button;
         }
     }
