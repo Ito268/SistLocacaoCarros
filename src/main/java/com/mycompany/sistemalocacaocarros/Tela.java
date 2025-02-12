@@ -11,6 +11,7 @@ public class Tela extends javax.swing.JFrame {
      */
     public Tela() {
         initComponents();
+        
     }
 
     /**
